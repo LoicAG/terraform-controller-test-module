@@ -1,5 +1,4 @@
-variable "test_config_map" {}
-variable "test_secret" {}
+variable "namespace_name" {}
 variable "kubernetes_host" {}
 
 provider "kubernetes" {
@@ -7,21 +6,9 @@ provider "kubernetes" {
   token    = "${file("/var/run/secrets/kubernetes.io/serviceaccount/token")}"
   insecure = true
 }
-resource "kubernetes_config_map" "test-config-map" {
+
+resource "kubernetes_namespace" "toto-namespace" {
   metadata {
-    name      = "test-config-map"
-    namespace = "terraform-controller"
+    name = "toto-namespace"
   }
-
-  data = {
-    test_config_map = "${var.test_config_map}"
-    test_secret     = "${var.test_secret}"
-  }
-}
-
-output "test_config_map" {
-  value = "${kubernetes_config_map.test-config-map.data.test_config_map}"
-}
-output "test_secret" {
-  value = "${kubernetes_config_map.test-config-map.data.test_secret}"
 }
