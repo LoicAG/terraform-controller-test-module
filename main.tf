@@ -2,7 +2,7 @@ variable "test_config_map" {}
 variable "test_secret" {}
 
 provider "kubernetes" {
-  host     = "https://10.43.0.1"
+  host     = "https://127.0.0.1:16443"
   token    = "${file("/var/run/secrets/kubernetes.io/serviceaccount/token")}"
   insecure = true
 }
