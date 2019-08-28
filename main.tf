@@ -1,14 +1,10 @@
-variable "namespace_name" {}
-variable "kubernetes_host" {}
+variable "gitlab_token" {}
+variable "project_name" {}
 
-provider "kubernetes" {
-  host     = "https://${var.kubernetes_host}"
-  token    = "${file("/var/run/secrets/kubernetes.io/serviceaccount/token")}"
-  insecure = true
+provider "giitlab" {
+  token    = "${var.gitlab_token}"
 }
 
-resource "kubernetes_namespace" "toto-namespace" {
-  metadata {
-    name = "toto-namespace"
-  }
+resource "gitlab_project" "test-project" {
+  name = "${var.project_name}"
 }
