@@ -1,7 +1,7 @@
 variable "gitlab_token" {}
 variable "project_name" {}
 
-provider "giitlab" {
+provider "gitlab" {
   token    = "${var.gitlab_token}"
 }
 
